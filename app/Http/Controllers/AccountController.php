@@ -8,62 +8,30 @@ use App\Models\Account;
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return Account::with('user')->get();
+        return Account::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAccountRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreAccountRequest $request)
     {
-        $account = $this->user->account()->create($request->validated());
+        $account = Account::create($request->validated());
 
         return $account;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
     public function show(Account $account)
     {
-        return $account->loadMissing('user');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAccountRequest  $request
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateAccountRequest $request, Account $account)
-    {
-        $account->update($request->validated());
-
         return $account;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
+    public function update(UpdateAccountRequest $request, Account $account)
+    {
+        return $account->update($request->validated());
+    }
+
     public function destroy(Account $account)
     {
-        $account->delete();
+        return $account->delete();
     }
 }

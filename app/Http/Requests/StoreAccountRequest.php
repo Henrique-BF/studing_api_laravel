@@ -27,6 +27,7 @@ class StoreAccountRequest extends FormRequest
             'name' => ['string', 'required'],
             'age' => ['numeric', 'required'],
             'email' => ['email', 'required'],
+            'user_id' => ['required'],
         ];
     }
 }

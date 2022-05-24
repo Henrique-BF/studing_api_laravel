@@ -24,6 +24,7 @@ class AccountFactory extends Factory
             'name' => $name,
             'email' => $email,
             'age' => $this->faker->numberBetween(18,40),
+            'user_id' => '',
         ];
     }
 }
