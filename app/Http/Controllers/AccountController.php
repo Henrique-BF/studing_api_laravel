@@ -9,6 +9,13 @@ use App\Models\User;
 
 class AccountController extends Controller
 {
+    protected User $user;
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +34,9 @@ class AccountController extends Controller
      */
     public function store(StoreAccountRequest $request)
     {
-        $user = User::factory()->create([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-        $user->account()->create($request->validated());
+        $account = $this->user->account()->create($request->validated());
 
-        return $user->load('account');
+        return $account;
     }
 
     /**
@@ -56,9 +59,9 @@ class AccountController extends Controller
      */
     public function update(UpdateAccountRequest $request, Account $account)
     {
-        $response = $account->update($request->validated());
+        $account->update($request->validated());
 
-        return response()->json(['success' => $response] + compact('account'), $response == true ? 200 : 500);
+        return $account;
     }
 
     /**

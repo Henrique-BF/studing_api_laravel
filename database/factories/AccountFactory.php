@@ -17,14 +17,13 @@ class AccountFactory extends Factory
      */
     public function definition()
     {
-        $email = $this->faker->unique()->safeEmail();
         $name = $this->faker->name();
+        $email = $this->faker->unique()->safeEmail();
 
         return [
-            'name' => $this->faker->name(),
-            'email' => $name,
+            'name' => $name,
+            'email' => $email,
             'age' => $this->faker->numberBetween(18,40),
-            'user_id' => User::factory()->create(['email' => $email, 'name' => $name]),
         ];
     }
 }

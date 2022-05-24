@@ -45,10 +45,10 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user) {
-            $user->account()->create([
+            Account::factory()->create([
                 'email' => $user->email,
                 'name' => $user->name,
-                'age' => $this->faker->numberBetween(18,40),
+                'user_id' => $user->id,
             ]);
         });
     }
