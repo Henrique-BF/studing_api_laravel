@@ -5,17 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
-use App\Models\User;
 
 class AccountController extends Controller
 {
-    protected User $user;
-
-    public function __construct()
-    {
-        $this->user = auth()->user();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +39,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return $account;
+        return $account->loadMissing('user');
     }
 
     /**
